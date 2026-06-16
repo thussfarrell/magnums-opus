@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Magnum's Opus — Manuscript Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; padding: 1.5rem; min-height: 100vh; }
+  h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .stat { background: #fff; border-radius: 10px; border: 0.5px solid #ddd; padding: 12px 14px; text-align: center; }
+  .stat-val { font-size: 22px; font-weight: 500; }
+  .stat-lbl { font-size: 11px; color: #888; margin-top: 3px; }
+  .dial-wrap { display: flex; flex-direction: column; align-items: center; margin: 0 0 1.5rem; }
+  .dial-note { font-size: 12px; color: #888; margin-top: 6px; text-align: center; }
+  .section-label { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+  .ch-card { background: #fff; border-radius: 10px; border: 0.5px solid #ddd; padding: 11px 13px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+  .ch-card:hover { border-color: #bbb; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .ch-card.active { border: 1.5px solid #378ADD; }
+  .ch-num { font-size: 11px; color: #aaa; margin-bottom: 2px; }
+  .ch-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; margin-bottom: 6px; }
+  .bar-bg { height: 5px; background: #eee; border-radius: 3px; }
+  .bar-fill { height: 5px; border-radius: 3px; }
+  .bar-meta { font-size: 10px; color: #aaa; text-align: right; margin-top: 4px; }
+  .comment-panel { background: #fff; border: 0.5px solid #ddd; border-radius: 12px; padding: 1.25rem 1.5rem; margin-top: 1rem; min-height: 130px; }
+  .cp-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+  .cp-body { font-size: 13px; color: #555; line-height: 1.65; margin-bottom: 10px; }
+  .cp-action { font-size: 12px; color: #185FA5; font-weight: 500; border-left: 2px solid #B5D4F4; padding-left: 10px; }
+  .progress-bar-wrap { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 14px 16px; margin-bottom: 1.5rem; }
+  .overall-label { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 6px; }
+  .overall-bar-bg { height: 8px; background: #eee; border-radius: 4px; }
+  .overall-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #1D9E75, #9FE1CB); width: 34%; }
+  @media (max-width: 500px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .chapter-grid { grid-template-columns: 1fr 1fr; }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Mr. Magnum's Opus</h1>
+<p class="subtitle">Manuscript dashboard &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Andrew W. Farrell</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="stat-val">86,440</div><div class="stat-lbl">total words</div></div>
+  <div class="stat"><div class="stat-val" style="color:#0F6E56">2</div><div class="stat-lbl">chapters complete</div></div>
+  <div class="stat"><div class="stat-val" style="color:#BA7517">11</div><div class="stat-lbl">in progress</div></div>
+  <div class="stat"><div class="stat-val" style="color:#E24B4A">2</div><div class="stat-lbl">urgent / empty</div></div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="overall-label"><span>Publication readiness</span><span style="font-weight:500;color:#1a1a1a">34%</span></div>
+  <div class="overall-bar-bg"><div class="overall-bar"></div></div>
+  <p style="font-size:11px;color:#aaa;margin-top:6px">Based on finished prose chapters vs target of ~65,000 publication-ready words</p>
+</div>
+
+<div class="dial-wrap">
+  <svg width="280" height="160" viewBox="0 0 280 160" aria-label="Completion dial — 34 percent">
+    <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="#eee" stroke-width="16" stroke-linecap="round"/>
+    <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="url(#dg)" stroke-width="16" stroke-linecap="round"
+      stroke-dasharray="362" stroke-dashoffset="239"/>
+    <defs>
+      <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#1D9E75"/>
+        <stop offset="100%" stop-color="#9FE1CB"/>
+      </linearGradient>
+    </defs>
+    <text x="140" y="122" text-anchor="middle" font-size="40" font-weight="500" fill="#1a1a1a">34%</text>
+    <text x="140" y="145" text-anchor="middle" font-size="13" fill="#888">publication ready</text>
+    <text x="27" y="158" text-anchor="middle" font-size="11" fill="#bbb">0%</text>
+    <text x="253" y="158" text-anchor="middle" font-size="11" fill="#bbb">100%</text>
+  </svg>
+</div>
+
+<p class="section-label">Chapters — click for editorial notes</p>
+<div class="chapter-grid" id="chGrid"></div>
+
+<div class="comment-panel">
+  <p class="cp-title" id="cpTitle" style="color:#888">Select a chapter above</p>
+  <p class="cp-body" id="cpBody">Editorial notes, status assessment, and suggested writing prompts will appear here when you select a chapter.</p>
+  <p class="cp-action" id="cpAction" style="display:none"></p>
+</div>
+
+<p style="font-size:11px;color:#bbb;text-align:center;margin-top:2rem">Mr. Magnum's Opus &nbsp;·&nbsp; Patrick &amp; Andrew Farrell &nbsp;·&nbsp; 2026</p>
+
+<script>
+const chapters = [
+  { num:"1", title:"I Could Write a Book", words:3007, pct:100, status:"complete",
+    badge:"Complete", bc:"#0F6E56", bb:"#E1F5EE",
+    comment:"The list + Miriam memory. Opens with Lithium carbonate, ends with 'and…' trailing into the sky. The dialysis pump pizza line is intentional — Andrew confirmed. The chapter established the voice, the structure, and the emotional register of everything that follows.",
+    action:"No editorial action needed. This chapter is done." },
+  { num:"2", title:"An Eternal Flame", words:9067, pct:100, status:"complete",
+    badge:"Complete", bc:"#0F6E56", bb:"#E1F5EE",
+    comment:"The richest prose chapter in the manuscript. Piano at 18 months, Father Morley on the Harley, Paul Simon backstage, the clarinet in the closet, Iverson's tone scale / porn discovery, Little Bear closing. The world is still whole. The thread is intact. Chapter 3 is about to break it.",
+    action:"Chapter complete. A publisher will assess the content on its merits. Write it true first — commercial decisions come later." },
+  { num:"3", title:"Can't Stop The Rain", words:10266, pct:72, status:"mixed",
+    badge:"Prose + notes", bc:"#633806", bb:"#FAEEDA",
+    comment:"The divorce lands perfectly — second-person hypothetical → apple pie → dishwashing ritual → 'May I be excused?' The halfpipe drop-in is now a full scene. The George Jetson art class is new — 'He is an artist, and I am a musician.' Ben Carson/Gifted Hands reference new. Some sections still in notes territory. The chapter ends on a single word: Divorce. Alone on the page. That word earned its isolation.",
+    action:"Chapter title: Can't Stop The Rain. Suggested prompt: Josh. One scene. The 3am rampage. What actually happened?" },
+  { num:"4", title:"Charles Stier / High School", words:8382, pct:30, status:"notes",
+    badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
+    comment:"Rich material in fragments: the orchestral listening project, seeing shapes and colors of sound, playing to the one person in the audience really listening. The emotional pivot — when the clarinet stopped being fun and became serious — is referenced but not yet rendered as a scene.",
+    action:"Suggested prompt: The moment Stier said something that changed how you played. Not a lesson — a moment." },
+  { num:"5", title:"Juilliard", words:5537, pct:25, status:"notes",
+    badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
+    comment:"Thelonious Monk heard for the first time — life changed. Miles Davis memoirs. Hap's Miles story via Marcus Miller. James Levine material present and significant. The emotional spine — what Juilliard did to the clarinet — not yet answered in the text.",
+    action:"Suggested prompt: The first time you heard Monk. Where were you. What did it do." },
+  { num:"6", title:"Peabody / Sherry", words:5398, pct:25, status:"notes",
+    badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
+    comment:"Sherry emerges fully here. The stick shift scene in the Mt. Hebron High School parking lot — teaching her to drive the Celica — is already half-written in the notes and has the quality of Andrew's best prose: specific, funny, affectionate, true.",
+    action:"Suggested prompt: The parking lot. Sherry. The clutch. Write it as it happened." },
+  { num:"7", title:"Germany", words:3991, pct:15, status:"urgent",
+    badge:"Urgent — missing core", bc:"#A32D2D", bb:"#FCEBEB",
+    comment:"STRUCTURALLY CRITICAL. Germany is the book's hinge — the moment the musical thread was pulled. Why did Andrew come home? The Karl-Heinz Steffens conversation, the Barenboim opportunity, the plane back to BWI. None of this is in the current text. Without this scene, the book has no origin point for the identity loss that drives the next fifteen years.",
+    action:"Suggested prompt: The conversation with Karl-Heinz. What was offered. What you said. Why you got on the plane." },
+  { num:"8", title:"Return to USA / Trading", words:2607, pct:20, status:"notes",
+    badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
+    comment:"Back in Baltimore. Zach at Nortel Networks. TradeMentor. The $100k credit card debt digging out. The bones are clear — Sherry as the north star, the clarinet set aside, the search for economic framework. Needs scene development.",
+    action:"Suggested prompt: The TradeMentor collapse. What happened. The moment it was over." },
+  { num:"9", title:"Cali / Psychotic Break / Sotsky", words:1260, pct:15, status:"urgent",
+    badge:"Urgent — needs development", bc:"#A32D2D", bb:"#FCEBEB",
+    comment:"The father driving by on Route 29 — not knowing Andrew was there, not knowing he was in crisis — and turning around at the exit and coming back. One of the most devastating images in the entire manuscript. Currently a sketch. Sotsky's lithium-as-insulin argument is here and is central to the book's argument.",
+    action:"Suggested prompt: Route 29. The car. Dad drives by. Write it from inside the car." },
+  { num:"10", title:"EMG Years", words:10196, pct:70, status:"strong",
+    badge:"Strongest in second half", bc:"#185FA5", bb:"#E6F1FB",
+    comment:"The richest chapter in the second half. California, EMG, world travel, Rob's three personalities, Shanghai Masters with Federer / Murray / Djokovic / Nadal, the step back and uppercut story. Same quality as Chapter 2. Rob as a character is book-quality writing.",
+    action:"Light editorial action needed. Organize the geography and timeline. Keep Rob exactly as written." },
+  { num:"11", title:"Georgetown / Wedding / Children", words:6556, pct:45, status:"mixed",
+    badge:"Prose + notes", bc:"#633806", bb:"#FAEEDA",
+    comment:"The normalized lithium years. 'I feel normal for the first time in my life' — said to Sherry the day Sotsky prescribed lithium. The Lance Armstrong encounter at an Austin bar is pure Andrew. Wedding and birth of children not yet written as scenes.",
+    action:"Suggested prompt: The wedding. One scene. What you remember most." },
+  { num:"12", title:"Move to Chatt / Health Crisis", words:2843, pct:40, status:"mixed",
+    badge:"Prose + notes", bc:"#633806", bb:"#FAEEDA",
+    comment:"The October 2017 McCarley appointment — lithium identified as the cause, the phone call to Soufleris — referenced but not rendered as a scene. This is the book's clinical turning point. Sherry singing for the first time in 20 years appears at the end: 'string those moments of sound together like a string of pearls.'",
+    action:"Suggested prompt: The McCarley appointment. October 2017. The moment he said it." },
+  { num:"13", title:"The Long Road to Recovery", words:5200, pct:30, status:"notes",
+    badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
+    comment:"Recovery philosophy in fragments. 'Do you want to be healed?' is the chapter's thesis. The Dispenza practice needs at least one full scene. The drunk driving / gun note is the book's most raw honesty — it needs to become a passage, not a bullet point.",
+    action:"Suggested prompt: The Dispenza practice. One session. What shifted." },
+  { num:"14", title:"March 2025", words:0, pct:0, status:"empty",
+    badge:"Empty — pending", bc:"#A32D2D", bb:"#FCEBEB",
+    comment:"No content. This is the climax of Part Four — creatinine 0.90, eGFR 85, kidneys returned to near-baseline after a nadir of Stage 3 CKD. The chapter is empty because Andrew is still living this part of the story. That is honest, not a failure. The lab data and the chart are ready when he is.",
+    action:"Hold. Ask Andrew what Chapter 14 is. The numbers are waiting for him." },
+  { num:"15", title:"Lessons / Musings", words:3802, pct:20, status:"notes",
+    badge:"Notes — essayistic", bc:"#633806", bb:"#FAEEDA",
+    comment:"Andrew's life principles in aphorism form. 'You can work with positive energy, negative energy, but not no energy — that is apathy.' Consider whether these belong distributed through earlier chapters or collected here as a standalone. Some are genuinely excellent and belong in the book somewhere.",
+    action:"Discussion needed: standalone chapter or woven through the narrative?" },
+  { num:"16", title:"Love / Lyrics", words:3716, pct:10, status:"copyright",
+    badge:"Copyright issue", bc:"#712B13", bb:"#FAECE7",
+    comment:"Beautiful concept — love as the final drug, each woman thinking he's speaking to her. Serious problem: full lyrics from The Doors, Waylon Jennings, Wilson Phillips, Four Seasons, and The Beatles are quoted verbatim. None of these can be published as written. Legally required fix before anything goes near an agent.",
+    action:"Required: all quoted lyrics must be replaced with Andrew's own prose about what those songs mean to him." },
+];
+
+const statusColor = { complete:"#1D9E75", strong:"#378ADD", mixed:"#BA7517", notes:"#BA7517", urgent:"#E24B4A", empty:"#888", copyright:"#D85A30" };
+
+const grid = document.getElementById('chGrid');
+const cpTitle = document.getElementById('cpTitle');
+const cpBody = document.getElementById('cpBody');
+const cpAction = document.getElementById('cpAction');
+
+chapters.forEach((ch, i) => {
+  const card = document.createElement('div');
+  card.className = 'ch-card';
+  card.innerHTML = `
+    <p class="ch-num">Chapter ${ch.num}</p>
+    <p class="ch-title">${ch.title}</p>
+    <span class="badge" style="color:${ch.bc};background:${ch.bb}">${ch.badge}</span>
+    <div class="bar-bg"><div class="bar-fill" style="width:${ch.pct}%;background:${statusColor[ch.status]}"></div></div>
+    <p class="bar-meta">${ch.pct}% &nbsp;·&nbsp; ${ch.words.toLocaleString()} words</p>
+  `;
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.ch-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    cpTitle.textContent = `Chapter ${ch.num} — ${ch.title}`;
+    cpTitle.style.color = statusColor[ch.status];
+    cpBody.textContent = ch.comment;
+    cpAction.textContent = '→ ' + ch.action;
+    cpAction.style.display = 'block';
+  });
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

@@ -33,7 +33,7 @@
   .progress-bar-wrap { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 14px 16px; margin-bottom: 1.5rem; }
   .overall-label { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 6px; }
   .overall-bar-bg { height: 8px; background: #eee; border-radius: 4px; }
-  .overall-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #1D9E75, #9FE1CB); width: 34%; }
+  .overall-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #1D9E75, #9FE1CB); width: 38%; }
   @media (max-width: 500px) {
     .stat-row { grid-template-columns: repeat(2, 1fr); }
     .chapter-grid { grid-template-columns: 1fr 1fr; }
@@ -47,14 +47,14 @@
 <p class="subtitle">Manuscript dashboard &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Andrew W. Farrell</p>
 
 <div class="stat-row">
-  <div class="stat"><div class="stat-val">86,440</div><div class="stat-lbl">total words</div></div>
-  <div class="stat"><div class="stat-val" style="color:#0F6E56">2</div><div class="stat-lbl">chapters complete</div></div>
-  <div class="stat"><div class="stat-val" style="color:#BA7517">11</div><div class="stat-lbl">in progress</div></div>
+  <div class="stat"><div class="stat-val">88,500</div><div class="stat-lbl">total words</div></div>
+  <div class="stat"><div class="stat-val" style="color:#0F6E56">3</div><div class="stat-lbl">chapters complete</div></div>
+  <div class="stat"><div class="stat-val" style="color:#BA7517">10</div><div class="stat-lbl">in progress</div></div>
   <div class="stat"><div class="stat-val" style="color:#E24B4A">2</div><div class="stat-lbl">urgent / empty</div></div>
 </div>
 
 <div class="progress-bar-wrap">
-  <div class="overall-label"><span>Publication readiness</span><span style="font-weight:500;color:#1a1a1a">34%</span></div>
+  <div class="overall-label"><span>Publication readiness</span><span style="font-weight:500;color:#1a1a1a">38%</span></div>
   <div class="overall-bar-bg"><div class="overall-bar"></div></div>
   <p style="font-size:11px;color:#aaa;margin-top:6px">Based on finished prose chapters vs target of ~65,000 publication-ready words</p>
 </div>
@@ -63,14 +63,14 @@
   <svg width="280" height="160" viewBox="0 0 280 160" aria-label="Completion dial — 34 percent">
     <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="#eee" stroke-width="16" stroke-linecap="round"/>
     <path d="M 25 140 A 115 115 0 0 1 255 140" fill="none" stroke="url(#dg)" stroke-width="16" stroke-linecap="round"
-      stroke-dasharray="362" stroke-dashoffset="239"/>
+      stroke-dasharray="362" stroke-dashoffset="224"/>
     <defs>
       <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#1D9E75"/>
         <stop offset="100%" stop-color="#9FE1CB"/>
       </linearGradient>
     </defs>
-    <text x="140" y="122" text-anchor="middle" font-size="40" font-weight="500" fill="#1a1a1a">34%</text>
+    <text x="140" y="122" text-anchor="middle" font-size="40" font-weight="500" fill="#1a1a1a">38%</text>
     <text x="140" y="145" text-anchor="middle" font-size="13" fill="#888">publication ready</text>
     <text x="27" y="158" text-anchor="middle" font-size="11" fill="#bbb">0%</text>
     <text x="253" y="158" text-anchor="middle" font-size="11" fill="#bbb">100%</text>
@@ -98,23 +98,23 @@ const chapters = [
     badge:"Complete", bc:"#0F6E56", bb:"#E1F5EE",
     comment:"The richest prose chapter in the manuscript. Piano at 18 months, Father Morley on the Harley, Paul Simon backstage, the clarinet in the closet, Iverson's tone scale / porn discovery, Little Bear closing. The world is still whole. The thread is intact. Chapter 3 is about to break it.",
     action:"Chapter complete. A publisher will assess the content on its merits. Write it true first — commercial decisions come later." },
-  { num:"3", title:"Can't Stop The Rain", words:10266, pct:72, status:"mixed",
-    badge:"Prose + notes", bc:"#633806", bb:"#FAEEDA",
-    comment:"The divorce lands perfectly — second-person hypothetical → apple pie → dishwashing ritual → 'May I be excused?' The halfpipe drop-in is now a full scene. The George Jetson art class is new — 'He is an artist, and I am a musician.' Ben Carson/Gifted Hands reference new. Some sections still in notes territory. The chapter ends on a single word: Divorce. Alone on the page. That word earned its isolation.",
-    action:"Chapter title: Can't Stop The Rain. Suggested prompt: Josh. One scene. The 3am rampage. What actually happened?" },
+  { num:"3", title:"Can't Stop The Rain", words:12400, pct:100, status:"complete",
+    badge:"Complete", bc:"#0F6E56", bb:"#E1F5EE",
+    comment:"Complete. The notes seam is gone — the whole back half is prose. Divorce dinner → dishwashing ritual → 'May I be excused?' remains the strongest opening in the book. Three-movement shape holds: the removal (divorce, Josh, the woodshop bedroom), the unsupervised construction (skateboarding, first chair, Leslie, alcohol, Mockmodesty), the first mirrors (Stewart and Barta, back to back). Leslie is now a full arc — the drugstore counter, the overdose, being made responsible for someone else's survival. Barta is dramatized: 'Do you want it? Yes or no.' 'Yes.' Ends on the door into Ch 4: 'But I need a teacher. Who will be my teacher?' Anachronisms fixed (Jason Lives, Princess Bride, New Jack Swing reframe).",
+    action:"Chapter complete. Word count approximate pending OCR of Andrew's PDF." },
   { num:"4", title:"Charles Stier / High School", words:8382, pct:30, status:"notes",
     badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
     comment:"Rich material in fragments: the orchestral listening project, seeing shapes and colors of sound, playing to the one person in the audience really listening. The emotional pivot — when the clarinet stopped being fun and became serious — is referenced but not yet rendered as a scene.",
     action:"Suggested prompt: The moment Stier said something that changed how you played. Not a lesson — a moment." },
-  { num:"5", title:"Juilliard", words:5537, pct:25, status:"notes",
+  { num:"5", title:"Juilliard", words:5539, pct:25, status:"notes",
     badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
     comment:"Thelonious Monk heard for the first time — life changed. Miles Davis memoirs. Hap's Miles story via Marcus Miller. James Levine material present and significant. The emotional spine — what Juilliard did to the clarinet — not yet answered in the text.",
     action:"Suggested prompt: The first time you heard Monk. Where were you. What did it do." },
-  { num:"6", title:"Peabody / Sherry", words:5398, pct:25, status:"notes",
+  { num:"6", title:"Peabody / Sherry", words:5399, pct:25, status:"notes",
     badge:"Notes + fragments", bc:"#633806", bb:"#FAEEDA",
     comment:"Sherry emerges fully here. The stick shift scene in the Mt. Hebron High School parking lot — teaching her to drive the Celica — is already half-written in the notes and has the quality of Andrew's best prose: specific, funny, affectionate, true.",
     action:"Suggested prompt: The parking lot. Sherry. The clutch. Write it as it happened." },
-  { num:"7", title:"Germany", words:3991, pct:15, status:"urgent",
+  { num:"7", title:"Germany", words:3992, pct:15, status:"urgent",
     badge:"Urgent — missing core", bc:"#A32D2D", bb:"#FCEBEB",
     comment:"STRUCTURALLY CRITICAL. Germany is the book's hinge — the moment the musical thread was pulled. Why did Andrew come home? The Karl-Heinz Steffens conversation, the Barenboim opportunity, the plane back to BWI. None of this is in the current text. Without this scene, the book has no origin point for the identity loss that drives the next fifteen years.",
     action:"Suggested prompt: The conversation with Karl-Heinz. What was offered. What you said. Why you got on the plane." },
@@ -150,7 +150,7 @@ const chapters = [
     badge:"Notes — essayistic", bc:"#633806", bb:"#FAEEDA",
     comment:"Andrew's life principles in aphorism form. 'You can work with positive energy, negative energy, but not no energy — that is apathy.' Consider whether these belong distributed through earlier chapters or collected here as a standalone. Some are genuinely excellent and belong in the book somewhere.",
     action:"Discussion needed: standalone chapter or woven through the narrative?" },
-  { num:"16", title:"Love / Lyrics", words:3716, pct:10, status:"copyright",
+  { num:"16", title:"Love / Lyrics", words:3717, pct:10, status:"copyright",
     badge:"Copyright issue", bc:"#712B13", bb:"#FAECE7",
     comment:"Beautiful concept — love as the final drug, each woman thinking he's speaking to her. Serious problem: full lyrics from The Doors, Waylon Jennings, Wilson Phillips, Four Seasons, and The Beatles are quoted verbatim. None of these can be published as written. Legally required fix before anything goes near an agent.",
     action:"Required: all quoted lyrics must be replaced with Andrew's own prose about what those songs mean to him." },
